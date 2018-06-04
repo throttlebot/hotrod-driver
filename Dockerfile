@@ -1,5 +1,6 @@
 FROM golang:1.8
 MAINTAINER Hantao Wang
+
 EXPOSE 8082
 
 RUN mkdir -p /go/src/gitlab.com/kelda-hotrod
@@ -10,8 +11,11 @@ RUN go get github.com/sirupsen/logrus
 
 WORKDIR /go/src/gitlab.com/kelda-hotrod
 
-RUN git clone git@gitlab.com:kelda-hotrod/hotrod-base.git
-RUN git clone git@gitlab.com:kelda-hotrod/hotrod-driver.git
+ARG git_pass
+ARG build_time
+
+RUN git clone https://user:$git_pass@gitlab.com/kelda-hotrod/hotrod-base
+RUN git clone https://user:$git_pass@gitlab.com/kelda-hotrod/hotrod-driver
 
 WORKDIR /go/src/gitlab.com/kelda-hotrod/hotrod-driver
 
