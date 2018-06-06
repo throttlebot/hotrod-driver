@@ -32,8 +32,8 @@ type Redis struct {
 }
 
 func newRedis() *Redis {
-	redisHost := os.Getenv("REDIS_MASTER_SERVICE_HOST")
-	redisPort := os.Getenv("REDIS_MASTER_SERVICE_PORT")
+	redisHost := os.Getenv("HOTROD_REDIS_MASTER_SERVICE_HOST")
+	redisPort := os.Getenv("HOTROD_REDIS_MASTER_SERVICE_PORT")
 	redisPass := os.Getenv("REDIS_MASTER_PASSWORD")
 
 	client := redis.NewClient(&redis.Options{
