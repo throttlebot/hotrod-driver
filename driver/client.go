@@ -40,7 +40,7 @@ func NewClient() *Client {
 	if err != nil {
 		log.WithError(err).Fatal("Cannot create TChannel")
 	}
-	clientIP := os.Getenv("HOTROD_DRIVER_SERVICE_HOST") + ":" + os.Getenv("HOTROD_DRIVER_SERVICE_PORT")
+	clientIP := "hotrod-driver" + ":" + os.Getenv("HOTROD_DRIVER_SERVICE_PORT")
 
 	clientOpts := &thrift.ClientOptions{
 		HostPort: clientIP,
