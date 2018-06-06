@@ -12,10 +12,10 @@ RUN go get github.com/sirupsen/logrus
 WORKDIR /go/src/gitlab.com/kelda-hotrod
 
 ARG git_pass
-ARG build_time
+ARG build_time=1
 
-RUN git clone https://user:$git_pass@gitlab.com/kelda-hotrod/hotrod-base
-RUN git clone https://user:$git_pass@gitlab.com/kelda-hotrod/hotrod-driver
+RUN git clone https://user:$git_pass@gitlab.com/will.wang1/hotrod-base
+RUN git clone https://user:$git_pass@gitlab.com/will.wang1/hotrod-driver
 
 WORKDIR /go/src/gitlab.com/kelda-hotrod/hotrod-driver
 

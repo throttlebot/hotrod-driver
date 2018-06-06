@@ -22,6 +22,7 @@ import (
 
 	"gitlab.com/kelda-hotrod/hotrod-driver/driver/thrift-gen/driver"
 	"time"
+	"os"
 )
 
 // Client is a remote client that implements driver.Interface
@@ -39,8 +40,10 @@ func NewClient() *Client {
 	if err != nil {
 		log.WithError(err).Fatal("Cannot create TChannel")
 	}
+	clientIP := os.Getenv("HOTROD_DRIVER_SERVICE_HOST") + ":" + os.Getenv("HOTROD_DRIVER_SERVICE_PORT")
+
 	clientOpts := &thrift.ClientOptions{
-		HostPort: "127.0.0.1:8082",
+		HostPort: clientIP,
 	}
 	thriftClient := thrift.NewClient(ch, "driver", clientOpts)
 	client := driver.NewTChanDriverClient(thriftClient)
