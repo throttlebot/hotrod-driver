@@ -47,7 +47,7 @@ stage:
     - sed -i -e s/APPLICATION_TRACK/stable/g hotrod.yaml
     - sed -i -e s/REPLICA_COUNT/1/g hotrod.yaml
     - kubectl apply -f hotrod.yaml --namespace $KUBE_NAMESPACE
-    - kubectl set env deployment/$IMAGE_NAME REDIS_MASTER_PASSWORD=$REDIS_PASS
+    - kubectl set env deployment/$CI_ENVIRONMENT_SLUG-$IMAGE_NAME REDIS_MASTER_PASSWORD=$REDIS_PASS
 
 
 
