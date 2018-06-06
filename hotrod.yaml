@@ -11,8 +11,6 @@ spec:
   ports:
   - name: hotrod-driver
     port: 8082
-    protocol: TCP
-    targetPort: hotrod-driver
   type: ClusterIP
   selector:
     appName: hotrod-driver
