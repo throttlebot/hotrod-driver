@@ -48,8 +48,13 @@ stage:
     - sed -i -e s/APPLICATION_TRACK/stable/g hotrod.yaml
     - sed -i -e s/REPLICA_COUNT/3/g hotrod.yaml
     - kubectl apply -f hotrod.yaml --namespace $KUBE_NAMESPACE
-    - echo "--namespace $KUBE_NAMESPACE"
     - kubectl set env deployment/$CI_ENVIRONMENT_SLUG-$IMAGE_NAME
       REDIS_MASTER_PASSWORD=$REDIS_PASS --namespace $KUBE_NAMESPACE
 
+test:
+  stage: test
+  variables:
+    KUBERNETES_NAMESPACE_OVERWRITE: $KUBE_NAMESPACE
+  script:
+    - echo "SUCCESS"
 
