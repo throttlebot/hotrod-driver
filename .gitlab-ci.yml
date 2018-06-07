@@ -54,6 +54,8 @@ variables:
 
 test:
   stage: test
+  environment:
+      name: StageEnv
   variables:
     KUBERNETES_NAMESPACE_OVERWRITE: sample
   before_script:
