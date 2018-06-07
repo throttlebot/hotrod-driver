@@ -1,7 +1,7 @@
 stages:
   - build
   - stage
-#  - test
+  - deploy
 
 image: docker:latest
 
@@ -16,6 +16,9 @@ variables:
   DOCKER_USER: willwangkelda
   REDIS_PASS: keldakelda
   KUBECTL_URL: https://storage.googleapis.com/kubernetes-release/release/v1.10.3/bin/linux/amd64/kubectl
+  KUBE_NAMESPACE: hotrod
+  EXTERNAL_REDIS_HOST: 10.0.0.11
+  EXTERNAL_REDIS_PORT: 6379
 
 before_script:
   - apk update && apk add curl bash openssl
@@ -55,10 +58,17 @@ stage:
     - kubectl set env deployment/$CI_ENVIRONMENT_SLUG-$IMAGE_NAME
       REDIS_MASTER_PASSWORD=$REDIS_PASS --namespace $KUBE_NAMESPACE
 
-#test:
-#  stage: test
-#  environment:
-#    name: StageEnv
-#  script:
-#    - kubectl port-forward service/
-
+production:
+  stage: deploy
+  environment:
+      name: ProdEnv
+  script:
+    - sed -i -e s/COMMITID/$CI_COMMIT_SHA/g hotrod.yaml
+    - sed -i -e s/GITLAB_CI_ENV_SLUG/$CI_ENVIRONMENT_SLUG/g hotrod.yaml
+    - sed -i -e s/APPLICATION_TRACK/stable/g hotrod.yaml
+    - sed -i -e s/REPLICA_COUNT/3/g hotrod.yaml
+    - kubectl apply -f hotrod.yaml --namespace $KUBE_NAMESPACE
+    - kubectl set env deployment/$CI_ENVIRONMENT_SLUG-$IMAGE_NAME
+      HOTROD_REDIS_MASTER_SERVICE_HOST=$EXTERNAL_REDIS_HOST
+      HOTROD_REDIS_MASTER_SERVICE_PORT=$EXTERNAL_REDIS_PORT
+      --namespace $KUBE_NAMESPACE
