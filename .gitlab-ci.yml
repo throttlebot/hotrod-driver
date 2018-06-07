@@ -1,6 +1,7 @@
 stages:
   - build
   - stage
+  - test
 
 image: docker:latest
 
@@ -55,6 +56,8 @@ test:
   stage: test
   variables:
     KUBERNETES_NAMESPACE_OVERWRITE: $KUBE_NAMESPACE
+  before_script:
+    - echo "SKIP"
   script:
     - echo "SUCCESS"
 
