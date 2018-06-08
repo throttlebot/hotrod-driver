@@ -56,7 +56,9 @@ stage:
     - sed -i -e s/REPLICA_COUNT/3/g hotrod.yaml
     - kubectl apply -f hotrod.yaml --namespace $KUBE_NAMESPACE
     - kubectl set env deployment/$CI_ENVIRONMENT_SLUG-$IMAGE_NAME
-      REDIS_MASTER_PASSWORD=$REDIS_PASS --namespace $KUBE_NAMESPACE
+      REDIS_PASS=$REDIS_PASS
+      REDIS_URL=hotrod-redis-master:6379
+      --namespace $KUBE_NAMESPACE
 
 production:
   stage: deploy
@@ -69,6 +71,5 @@ production:
     - sed -i -e s/REPLICA_COUNT/3/g hotrod.yaml
     - kubectl apply -f hotrod.yaml --namespace $KUBE_NAMESPACE
     - kubectl set env deployment/$CI_ENVIRONMENT_SLUG-$IMAGE_NAME
-      HOTROD_REDIS_MASTER_SERVICE_HOST=$EXTERNAL_REDIS_HOST
-      HOTROD_REDIS_MASTER_SERVICE_PORT=$EXTERNAL_REDIS_PORT
+      REDIS_URL=$EXTERNAL_REDIS_HOST:6379
       --namespace $KUBE_NAMESPACE
