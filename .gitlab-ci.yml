@@ -19,11 +19,14 @@ variables:
   KUBE_NAMESPACE: hotrod
   EXTERNAL_REDIS_HOST: 10.0.0.3
   EXTERNAL_REDIS_PORT: 6379
+  ISTIO_URL: https://github.com/istio/istio/releases/download/0.8.0/istio-0.8.0-linux.tar.gz
 
 before_script:
   - apk update && apk add curl bash openssl
   - curl -LO $KUBECTL_URL
   - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+  - curl -L $ISTIO_URL | tar xz
+  - mv ./istio-*/bin/istioctl /usr/local/bin/istioctl
   - mkdir -p $HOME/.kube
   - cat $KUBECONFIG > $HOME/.kube/config
 
@@ -54,7 +57,8 @@ stage:
     - sed -i -e s/GITLAB_CI_ENV_SLUG/$CI_ENVIRONMENT_SLUG/g hotrod.yaml
     - sed -i -e s/APPLICATION_TRACK/stable/g hotrod.yaml
     - sed -i -e s/REPLICA_COUNT/3/g hotrod.yaml
-    - kubectl apply -f hotrod.yaml --namespace $KUBE_NAMESPACE
+    - istioctl kube-inject -f hotrod.yaml -o hotrod-with-istio.yaml
+    - kubectl apply -f hotrod-with-istio.yaml --namespace $KUBE_NAMESPACE
     - kubectl set env deployment/$CI_ENVIRONMENT_SLUG-$IMAGE_NAME
       REDIS_PASS=$REDIS_PASS
       REDIS_URL=hotrod-redis-master:6379
@@ -70,7 +74,8 @@ production:
     - sed -i -e s/GITLAB_CI_ENV_SLUG/$CI_ENVIRONMENT_SLUG/g hotrod.yaml
     - sed -i -e s/APPLICATION_TRACK/stable/g hotrod.yaml
     - sed -i -e s/REPLICA_COUNT/3/g hotrod.yaml
-    - kubectl apply -f hotrod.yaml --namespace $KUBE_NAMESPACE
+    - istioctl kube-inject -f hotrod.yaml -o hotrod-with-istio.yaml
+    - kubectl apply -f hotrod-with-istio.yaml --namespace $KUBE_NAMESPACE
     - kubectl set env deployment/$CI_ENVIRONMENT_SLUG-$IMAGE_NAME
       REDIS_URL=$EXTERNAL_REDIS_HOST:6379
       --namespace $KUBE_NAMESPACE
