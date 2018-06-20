@@ -17,7 +17,7 @@ variables:
   REDIS_PASS: keldakelda
   KUBECTL_URL: https://storage.googleapis.com/kubernetes-release/release/v1.10.3/bin/linux/amd64/kubectl
   KUBE_NAMESPACE: hotrod
-  EXTERNAL_REDIS_HOST: 10.0.0.11
+  EXTERNAL_REDIS_HOST: 10.0.0.3
   EXTERNAL_REDIS_PORT: 6379
 
 before_script:
