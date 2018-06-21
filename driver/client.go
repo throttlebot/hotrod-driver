@@ -20,7 +20,7 @@ import (
 	"github.com/uber/tchannel-go"
 	"github.com/uber/tchannel-go/thrift"
 
-	"gitlab.com/kelda-hotrod/hotrod-driver/driver/thrift-gen/driver"
+	"gitlab.com/will.wang1/hotrod-driver/driver/thrift-gen/driver"
 	"time"
 )
 

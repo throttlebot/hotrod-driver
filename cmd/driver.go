@@ -20,7 +20,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"gitlab.com/kelda-hotrod/hotrod-driver/driver"
+	"gitlab.com/will.wang1/hotrod-driver/driver"
 )
 
 // driverCmd represents the driver command

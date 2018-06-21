@@ -20,8 +20,8 @@ import (
 	"github.com/go-redis/redis"
 	log "github.com/sirupsen/logrus"
 
-	"gitlab.com/kelda-hotrod/hotrod-base/pkg/delay"
-	"gitlab.com/kelda-hotrod/hotrod-base/config"
+	"gitlab.com/will.wang1/hotrod-base/pkg/delay"
+	"gitlab.com/will.wang1/hotrod-base/config"
 
 	"os"
 )
