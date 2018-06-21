@@ -9,7 +9,7 @@ spec:
   # if your cluster supports it, uncomment the following to automatically create
   # an external load-balanced IP for the driver service.
   ports:
-  - name: http-hotrod-driver
+  - name: hotrod-driver
     port: 8082
   type: ClusterIP
   selector:
