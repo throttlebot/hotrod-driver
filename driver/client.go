@@ -21,7 +21,6 @@ import (
 	"github.com/uber/tchannel-go/thrift"
 
 	"gitlab.com/will.wang1/hotrod-driver/driver/thrift-gen/driver"
-	"time"
 )
 
 // Client is a remote client that implements driver.Interface
@@ -56,8 +55,6 @@ func NewClient() *Client {
 // FindNearest implements driver.Interface#FindNearest as an RPC
 func (c *Client) FindNearest(ctx context.Context, location string) ([]Driver, error) {
 	log.WithField("location", location).Info("Finding nearest drivers")
-	ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)
-	defer cancel()
 	results, err := c.client.FindNearest(thrift.Wrap(ctx), location)
 	if err != nil {
 		return nil, err
