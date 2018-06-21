@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: redis-ext
+spec:
+  hosts:
+  - 10.0.0.3
+  ports:
+  - number: 6379
+    name: redis
+    protocol: REDIS

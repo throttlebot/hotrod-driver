@@ -70,6 +70,7 @@ production:
       name: ProdEnv
   when: manual
   script:
+    - kubectl apply -f istio-allow-outbound-redis.yaml --namespace $KUBE_NAMESPACE
     - sed -i -e s/COMMITID/$CI_COMMIT_SHA/g hotrod.yaml
     - sed -i -e s/GITLAB_CI_ENV_SLUG/$CI_ENVIRONMENT_SLUG/g hotrod.yaml
     - sed -i -e s/APPLICATION_TRACK/stable/g hotrod.yaml
