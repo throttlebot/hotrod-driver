@@ -3,7 +3,7 @@
 package main
 
 import (
-	"gitlab.com/will.wang1/hotrod-driver/cmd"
+	"github.com/kelda-inc/hotrod-driver/cmd"
 )
 
 func main() {

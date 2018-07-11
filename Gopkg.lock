@@ -4,8 +4,8 @@
 [[projects]]
   name = "github.com/apache/thrift"
   packages = ["lib/go/thrift"]
-  revision = "53dd39833a08ce33582e5ff31fa18bb4735d6731"
-  version = "0.9.3"
+  revision = "327ebb6c2b6df8bf075da02ef45a2a034e9b79ba"
+  version = "0.11.0"
 
 [[projects]]
   name = "github.com/go-redis/redis"
@@ -27,6 +27,15 @@
   packages = ["."]
   revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
   version = "v1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/kelda-inc/hotrod-base"
+  packages = [
+    "config",
+    "pkg/delay"
+  ]
+  revision = "1b4b1be1ff48a8269837aaa62fe8e1dcf8486a00"
 
 [[projects]]
   name = "github.com/opentracing/opentracing-go"
@@ -66,24 +75,17 @@
   name = "github.com/uber/tchannel-go"
   packages = [
     ".",
+    "internal/argreader",
     "relay",
     "thrift",
     "thrift/gen-go/meta",
     "tnet",
+    "tos",
     "trand",
     "typed"
   ]
-  revision = "1a0e35378f6f721bc07f6c4466bc9701ed70b506"
-  version = "v1.1.0"
-
-[[projects]]
-  branch = "master"
-  name = "gitlab.com/will.wang1/hotrod-base"
-  packages = [
-    "config",
-    "pkg/delay"
-  ]
-  revision = "45976170c3c1ca9e8220c867c7a576ed28e26ced"
+  revision = "7f5c12c66261f3ac3c5dde959d65eed59e3b63af"
+  version = "v1.11.0"
 
 [[projects]]
   branch = "master"
@@ -94,8 +96,15 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
-  packages = ["context"]
-  revision = "afe8f62b1d6bbd81f31868121a50b06d8188e1f9"
+  packages = [
+    "bpf",
+    "context",
+    "internal/iana",
+    "internal/socket",
+    "ipv4",
+    "ipv6"
+  ]
+  revision = "039a4258aec0ad3c79b905677cceeab13b296a77"
 
 [[projects]]
   branch = "master"
@@ -104,11 +113,11 @@
     "unix",
     "windows"
   ]
-  revision = "ad87a3a340fa7f3bed189293fbfa7a9b7e021ae1"
+  revision = "1b2967e3c290b7c545b3db0deeda16e9be4f98a2"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e41812b6b3361d461058465bfe53911869dd26b52d360cf40c041af56418b3e9"
+  inputs-digest = "adede9e3d0047e6a510dc029b5e1d13a84b3098be999d39283ebb673d7626d79"
   solver-name = "gps-cdcl"
   solver-version = 1

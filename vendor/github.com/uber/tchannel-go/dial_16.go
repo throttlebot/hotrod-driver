@@ -18,22 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package relay
+// +build !go1.7
 
-type noopStats struct{}
+package tchannel
 
-// NewNoopStats returns a no-op implementation of Stats.
-func NewNoopStats() Stats {
-	return noopStats{}
+import (
+	"net"
+
+	"golang.org/x/net/context"
+)
+
+func dialContext(ctx context.Context, hostPort string) (net.Conn, error) {
+	timeout := getTimeout(ctx)
+	return net.DialTimeout("tcp", hostPort, timeout)
 }
-
-func (n noopStats) Begin(_ CallFrame) CallStats {
-	return noopCallStats{}
-}
-
-type noopCallStats struct{}
-
-func (n noopCallStats) Succeeded()      {}
-func (n noopCallStats) Failed(_ string) {}
-func (n noopCallStats) SetPeer(_ Peer)  {}
-func (n noopCallStats) End()            {}

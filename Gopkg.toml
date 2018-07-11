@@ -27,11 +27,15 @@
 
 [[constraint]]
   name = "github.com/apache/thrift"
-  version = "0.9.3"
+  version = "0.11.0"
 
 [[constraint]]
   name = "github.com/go-redis/redis"
   version = "6.12.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/kelda-inc/hotrod-base"
 
 [[constraint]]
   name = "github.com/sirupsen/logrus"
@@ -43,11 +47,7 @@
 
 [[constraint]]
   name = "github.com/uber/tchannel-go"
-  version = "1.1.0"
-
-[[constraint]]
-  branch = "master"
-  name = "gitlab.com/will.wang1/hotrod-base"
+  version = "1.11.0"
 
 [prune]
   go-tests = true
