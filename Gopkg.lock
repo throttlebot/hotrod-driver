@@ -4,8 +4,8 @@
 [[projects]]
   name = "github.com/apache/thrift"
   packages = ["lib/go/thrift"]
-  revision = "327ebb6c2b6df8bf075da02ef45a2a034e9b79ba"
-  version = "0.11.0"
+  revision = "53dd39833a08ce33582e5ff31fa18bb4735d6731"
+  version = "0.9.3"
 
 [[projects]]
   name = "github.com/go-redis/redis"
@@ -118,6 +118,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "adede9e3d0047e6a510dc029b5e1d13a84b3098be999d39283ebb673d7626d79"
+  inputs-digest = "ea6b4b2218d9e69310a093fe96f1584b87b0a150b1d3df6e80a9813a23f2ef54"
   solver-name = "gps-cdcl"
   solver-version = 1
