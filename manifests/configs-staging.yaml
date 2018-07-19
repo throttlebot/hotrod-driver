@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: driver-configs
+  namespace: hotrod
+data:
+  redis-url: hotrod-redis-master
