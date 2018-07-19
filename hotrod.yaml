@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: hotrod-driver
-        image: registry.hub.docker.com/willwangkelda/hotrod-driver
+        image: index.docker.io/willwangkelda/hotrod-driver
         command: ["/go/bin/hotrod", "driver"]
         env:
         - name: GET_HOSTS_FROM
