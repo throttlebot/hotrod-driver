@@ -41,5 +41,10 @@ spec:
         env:
         - name: GET_HOSTS_FROM
           value: dns
+        - name: REDIS_PASS
+          valueFrom:
+          secretKeyRef:
+            name: redis
+            key: password
         ports:
         - containerPort: 8082
