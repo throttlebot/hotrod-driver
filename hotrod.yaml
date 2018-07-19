@@ -7,7 +7,7 @@ metadata:
     appName: hotrod-driver
 spec:
   # if your cluster supports it, uncomment the following to automatically create
-  # an external load-balanced IP for the driver service.
+  # an external load-balanced IP for the driver service. Use CLusterIP
   ports:
   - name: hotrod-driver
     port: 8082
