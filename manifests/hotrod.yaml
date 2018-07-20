@@ -44,7 +44,7 @@ spec:
         - name: REDIS_PASS
           valueFrom:
             secretKeyRef:
-              name: hotrod-redis
+              name: redis
               key: redis-password
         - name: REDIS_URL
           valueFrom:
