@@ -4,4 +4,4 @@ metadata:
   name: driver-configs
   namespace: hotrod
 data:
-  redis-url: hotrod-redis-master:6379
+  redis-url: redis-master:6379
