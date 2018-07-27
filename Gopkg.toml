@@ -52,3 +52,7 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+  [[prune.project]]
+  name = "github.com/uber/tchannel-go"
+  unused-packages = false
