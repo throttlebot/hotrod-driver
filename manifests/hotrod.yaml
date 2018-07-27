@@ -37,6 +37,7 @@ spec:
       containers:
       - name: hotrod-driver
         image: index.docker.io/willwangkelda/hotrod-driver
+        imagePullPolicy: IfNotPresent
         command: ["/go/bin/hotrod", "driver"]
         env:
         - name: GET_HOSTS_FROM
