@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: hotrod-driver
-        image: index.docker.io/willwangkelda/hotrod-driver:ca613c243fe932d37af894ebb6ecf640c50317e9
+        image: index.docker.io/willwangkelda/hotrod-driver:map
         imagePullPolicy: IfNotPresent
         command: ["/go/bin/hotrod", "driver"]
         env:

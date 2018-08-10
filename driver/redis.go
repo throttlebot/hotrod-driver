@@ -20,9 +20,6 @@ import (
 	"github.com/go-redis/redis"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/kelda-inc/hotrod-base/pkg/delay"
-	"github.com/kelda-inc/hotrod-base/config"
-
 	"os"
 	"time"
 )
@@ -47,14 +44,12 @@ func newRedis() *Redis {
 // FindDriverIDs finds IDs of drivers who are near the location.
 func (r *Redis) FindDriverIDs(ctx context.Context, location string) ([]string, error) {
 	// simulate RPC delay
-	delay.Sleep(config.RedisFindDelay, config.RedisFindDelayStdDev)
 	return r.Keys("T7*").Result()
 }
 
 // GetDriver returns driver and the current car location
 func (r *Redis) GetDriver(ctx context.Context, driverID string) (Driver, error) {
 	// simulate RPC delay
-	delay.Sleep(config.RedisGetDelay, config.RedisGetDelayStdDev)
 	driver, err := r.Get(driverID).Result()
 	if err != nil {
 		log.WithField("driver_id", driverID).WithError(err).Error("failed to get driver")
@@ -70,12 +65,10 @@ func (r *Redis) GetDriver(ctx context.Context, driverID string) (Driver, error) 
 // AttemptLock calls SETNX and returns if the lock was acquired
 func (r *Redis) AttemptLock(ctx context.Context, id string) bool {
 	// simulate RPC delay
-	time.Sleep(time.Millisecond * 1500)
 	return r.SetNX("lock-" + id, 1, time.Minute * 1000).Val()
 }
 
 func (r *Redis) Unlock(id string) {
 	// simulate RPC delay
-	time.Sleep(time.Millisecond * 1500)
 	r.Del("lock-" + id)
 }
