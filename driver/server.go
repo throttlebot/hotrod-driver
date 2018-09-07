@@ -68,7 +68,6 @@ func (s *Server) Run() error {
 
 // FindNearest implements Thrift interface TChanDriver
 func (s *Server) FindNearest(ctx thrift.Context, location string) ([]*driver.DriverLocation, error) {
-	log.WithField("location", location).Info("Searching for nearby drivers")
 	driverIDs, err := s.redis.FindDriverIDs(ctx, location)
 	if err != nil {
 		log.WithError(err).Error("Failed to list drivers")
@@ -95,24 +94,19 @@ func (s *Server) FindNearest(ctx thrift.Context, location string) ([]*driver.Dri
 			Location: drv.Location,
 		}
 	}
-	log.WithField("num_drivers", len(retMe)).Info("Search successful")
 	return retMe, nil
 }
 
 // Lock uses redis to implement a lock on an account
 func (s *Server) Lock(ctx thrift.Context, id string) (*driver.Result_, error) {
-	log.WithField(id, id).Info("Attempting to secure lock")
 	for !s.redis.AttemptLock(ctx, id) {
 		time.Sleep(time.Millisecond * 100)
 	}
-	log.WithField(id, id).Info("Secured lock")
 	return &driver.Result_{}, nil
 }
 
 // Lock uses redis to implement a lock on an account
 func (s *Server) Unlock(ctx thrift.Context, id string) (*driver.Result_, error) {
-	log.WithField(id, id).Info("Releasing lock")
 	s.redis.Unlock(id)
-	log.WithField(id, id).Info("Released lock")
 	return &driver.Result_{}, nil
 }

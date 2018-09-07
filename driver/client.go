@@ -61,7 +61,6 @@ func NewClient() *Client {
 
 // FindNearest implements driver.Interface#FindNearest as an RPC
 func (c *Client) FindNearest(ctx context.Context, location string) ([]Driver, error) {
-	log.WithField("location", location).Info("Finding nearest drivers")
 	ctx, cancel := context.WithTimeout(ctx, 20*time.Second)
 	defer cancel()
 	results, err := c.client.FindNearest(thrift.Wrap(ctx), location)
@@ -84,7 +83,6 @@ func fromThrift(results []*driver.DriverLocation) []Driver {
 
 // Lock places a lock on the ID and is used to alter balances
 func (c *Client) Lock(ctx context.Context, id string) {
-	log.WithField("id", id).Info("Securing lock")
 	ctx, cancel := context.WithTimeout(ctx, 100*time.Minute)
 	defer cancel()
 	_, err := c.client.Lock(thrift.Wrap(ctx), id)
@@ -94,7 +92,6 @@ func (c *Client) Lock(ctx context.Context, id string) {
 }
 
 func (c *Client) Unlock(ctx context.Context, id string) {
-	log.WithField("id", id).Info("releasing lock")
 	ctx, cancel := context.WithTimeout(ctx, 100*time.Minute)
 	defer cancel()
 	_, err := c.client.Unlock(thrift.Wrap(ctx), id)

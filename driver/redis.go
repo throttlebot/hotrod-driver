@@ -18,7 +18,6 @@ import (
 	"context"
 
 	"github.com/go-redis/redis"
-	log "github.com/sirupsen/logrus"
 
 	"os"
 	"time"
@@ -52,7 +51,6 @@ func (r *Redis) GetDriver(ctx context.Context, driverID string) (Driver, error) 
 	// simulate RPC delay
 	driver, err := r.Get(driverID).Result()
 	if err != nil {
-		log.WithField("driver_id", driverID).WithError(err).Error("failed to get driver")
 		return Driver{}, err
 	}
 
