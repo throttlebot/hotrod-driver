@@ -13,4 +13,6 @@ WORKDIR /go/src/github.com/kelda-inc/hotrod-driver
 RUN go build -o hotrod main.go
 RUN mv hotrod /go/bin/
 
-ENTRYPOINT ["/go/bin/hotrod", "driver"]
+COPY Makefile Makefile
+
+ENTRYPOINT ["make", "all"]
